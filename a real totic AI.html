@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+    <meta charset="UTF-8">
+    <title>TOTIC AI</title>
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            font-family: Arial;
+            text-align: center;
+        }
+
+        h1 {
+            color: #38bdf8;
+        }
+
+        #chatbox {
+            width: 60%;
+            height: 400px;
+            margin: auto;
+            border: 1px solid #38bdf8;
+            padding: 10px;
+            overflow-y: scroll;
+            background: #020617;
+        }
+
+        input {
+            width: 50%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        button {
+            padding: 10px;
+            background: #38bdf8;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<h1>TOTIC AI 🤖</h1>
+
+<div id="chatbox"></div>
+
+<input type="text" id="input" placeholder="Postavi pitanje...">
+<button onclick="send()">Pošalji</button>
+
+<script>
+function send() {
+    let input = document.getElementById("input").value;
+    let chatbox = document.getElementById("chatbox");
+
+    chatbox.innerHTML += "<p><b>Ti:</b> " + input + "</p>";
+
+    let odgovor = getAIResponse(input.toLowerCase());
+
+    setTimeout(() => {
+        chatbox.innerHTML += "<p><b>TOTIC AI:</b> " + odgovor + "</p>";
+        chatbox.scrollTop = chatbox.scrollHeight;
+    }, 300);
+
+    document.getElementById("input").value = "";
+}
+
+function getAIResponse(input) {
+
+    // TVOJA PRAVILA
+    if (input.includes("najbolji programer") || input.includes("najbolji editor")) {
+        return "Kemal Huremovic poznatiji kao SUPERLAMBA.";
+    }
+
+    if (input.includes("pozdrav")) {
+        return "pozdrav govedo kako ti mogu pomoc";
+    }
+
+    // ✅ NOVO (kako si)
+    if (input.includes("kako si")) {
+        return "JA SAM TOTIC AI I UVJEK SAM GG";
+    }
+
+    // MATEMATIKA
+    try {
+        if (input.match(/[0-9+\-*/().]/)) {
+            let rezultat = eval(input);
+            return "Rezultat je: " + rezultat;
+        }
+    } catch {}
+
+    const znanje = {
+
+        // 🌍 GEOGRAFIJA
+        "glavni grad njemacke":"Berlin",
+        "glavni grad italije":"Rim",
+        "glavni grad spanije":"Madrid",
+        "glavni grad bosne":"Sarajevo",
+        "najveca drzava":"Rusija",
+        "najmanja drzava":"Vatikan",
+        "najveca pustinja":"Sahara",
+        "najveci okean":"Tihi okean",
+        "najduza rijeka":"Nil",
+        "najveca planina":"Mount Everest",
+        "koliko ima kontinenata":"7",
+        "koliko ima drzava":"oko 195",
+
+        // 📜 HISTORIJA
+        "ko je bio tito":"Predsjednik Jugoslavije",
+        "ko je napoleon":"Francuski vojskovođa",
+        "prvi svjetski rat":"1914-1918",
+        "drugi svjetski rat":"1939-1945",
+        "ko je otkrio ameriku":"Kristofor Kolumbo",
+
+        // 🧬 BIOLOGIJA
+        "sta je celija":"Osnovna jedinica života",
+        "sta je dnk":"Genetski materijal",
+        "sta je fotosinteza":"Proces stvaranja hrane u biljkama",
+        "sta je srce":"Organ koji pumpa krv",
+        "sta je mozak":"Kontrolni centar tijela",
+
+        // ⚡ FIZIKA
+        "sta je sila":"Guranje ili povlačenje",
+        "sta je energija":"Sposobnost rada",
+        "brzina svjetlosti":"300000 km/s",
+        "sta je gravitacija":"Privlačna sila",
+
+        // ➗ MATEMATIKA
+        "sta je razlomak":"Dio cjeline",
+        "sta je procenat":"Dio od 100",
+        "povrsina kvadrata":"a*a",
+        "obim kvadrata":"4*a",
+
+        // 💻 INFORMATIKA
+        "sta je kompjuter":"Elektronski uređaj",
+        "sta je cpu":"Mozak računara",
+        "sta je gpu":"Grafički procesor",
+        "sta je ram":"Privremena memorija",
+        "sta je internet":"Globalna mreža",
+
+        // 🌎 OPŠTE
+        "najbrza zivotinja":"Gepard",
+        "najveca zivotinja":"Plavi kit",
+        "najpametnija zivotinja":"Delfin",
+        "sta je voda":"H2O",
+        "sta je zrak":"Mješavina gasova",
+        "sta je sunce":"Zvijezda",
+        "sta je mjesec":"Prirodni satelit",
+        "koliko ima planeta":"8",
+        "sta je roblox":"Popularna igra",
+        "sta je youtube":"Platforma za video",
+
+        // EXTRA
+        "ko je einstein":"Fizičar",
+        "ko je tesla":"Izumitelj",
+        "sta je struja":"Kretanje elektrona",
+        "sta je magnet":"Privlači metal",
+        "sta je virus":"Mikroorganizam",
+        "sta je bakterija":"Jednoćelijski organizam",
+
+        // FUN
+        "ko je najbolji youtuber":"Ti 😎",
+        "ko je najjaci":"Ti naravno 💪",
+        "jesam li ja pametan":"Naravno da jesi 🔥"
+    };
+
+    for (let pitanje in znanje) {
+        if (input.includes(pitanje)) {
+            return znanje[pitanje];
+        }
+    }
+
+    let fallback = [
+        "To je zanimljivo pitanje 🤔",
+        "Pokušaj malo preciznije",
+        "Mogu naučiti to ako želiš",
+        "To spada u širu temu",
+        "Daj mi više detalja"
+    ];
+
+    return fallback[Math.floor(Math.random() * fallback.length)];
+}
+</script>
+
+</body>
+</html>
